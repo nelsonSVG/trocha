@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-accent: var(--font-accent);
+  --font-mono: var(--font-mono);
+
+  --color-mountain-green: #000000;
+  --color-earth-brown: #333333;
+  --color-mist-gray: #E5E5E5;
+  --color-snow-white: #FFFFFF;
+  --color-charcoal: #000000;
+  --color-paramo-gold: #000000;
+}
+
+@layer base {
+  body {
+    @apply font-serif bg-white text-black;
+  }
+}
+
+.wireframe-grid {
+  background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 40px 40px;
+}
