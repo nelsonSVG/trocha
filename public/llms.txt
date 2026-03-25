@@ -1,0 +1,39 @@
+# Agarrando Trocha
+# Website: https://agarrandotrocha.com
+
+## About
+Agarrando Trocha es un proyecto de bikepacking y documentales creado por Camilo Medina, cineasta y realizador audiovisual de Bogotá, Colombia. El proyecto consiste en recorrer Colombia exclusivamente en bicicleta y por trochas (caminos sin pavimentar), documentando la belleza natural, la gente y las historias de los pueblos colombianos.
+
+## Tagline
+"¿Qué hay detrás de las montañas?" — La pregunta infantil de Camilo que originó todo el proyecto.
+
+## Philosophy
+"Conocer para amar y amar para preservar." El bikepacking como terapia, el minimalismo como filosofía, y el silencio como refugio.
+
+## Creator
+- Name: Camilo Medina
+- Profession: Cineasta / Realizador Audiovisual
+- Location: Bogotá, Colombia
+- Instagram: @agarrandotrochacol
+- YouTube: Agarrando Trocha
+- Email: hola@agarrandotrocha.com
+
+## Key Facts
+- Founded: 2021
+- Towns visited: 60+
+- Departments covered: 13+
+- Years of travel: 4+
+- Main collaboration: Revista Semana ("Relatos del Camino")
+- Current project: Documental "La Ruta de los Olvidados" (10 departamentos, 3 meses)
+- Traditions: Every December estrena una ruta nueva; every New Year visits a páramo
+
+## Pages
+- /historia — Timeline del proyecto y biografía de Camilo
+- /videos — Documentales: "Relatos del Camino" (con Semana), "La Ruta de los Olvidados", "Detrás de la Cámara"
+- /blog — "Diarios de Ruta": relatos, reflexiones e historias de la trocha
+- /tienda — Productos: pocillo de peltre, camisetas, termos, fotografías fine art
+- /comunidad — "Los Caminantes": membresías y aportes al proyecto
+- /galeria — "Instantes": fotografías y videos de los viajes
+
+## Tags
+bikepacking, Colombia, ciclismo de aventura, documentales, turismo rural, páramos, slow travel, minimalismo, Camilo Medina, trochas, montañas, ruralidad, historias de Colombia
