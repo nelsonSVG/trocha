@@ -100,6 +100,11 @@ export const metadata: Metadata = {
   },
   category: 'travel',
   classification: 'bikepacking, documentary, travel, Colombia',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 const websiteSchema = {
