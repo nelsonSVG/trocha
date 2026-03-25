@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instantes — Agarrando Trocha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --negro: #0d0d0d;
+            --negro-suave: #1a1a1a;
+            --gris-oscuro: #2a2a2a;
+            --gris-medio: #6b6b6b;
+            --gris-claro: #999;
+            --gris-muy-claro: #d4d0c8;
+            --blanco-hueso: #f2efe8;
+            --blanco-calido: #f8f6f1;
+            --blanco-puro: #ffffff;
+            --tierra: #8B7355;
+            --oro: #C9A962;
+            --oro-suave: #d4b87a;
+            --verde-oscuro: #2D4A3E;
+            --niebla: #B8C5C9;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--blanco-calido);
+            color: var(--negro);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px;
+        }
+
+        /* Nav */
+        nav {
+            background: rgba(248,246,241,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139,115,85,0.12);
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gris-medio);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--tierra);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--negro); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 5px; z-index: 1001; }
+        .menu-toggle span { width: 28px; height: 1.5px; background: var(--negro); transition: all 0.3s; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: var(--blanco-calido); z-index: 999;
+            flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+        }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { text-decoration: none; color: var(--negro); font-family: 'Playfair Display',serif; font-size: 2rem; transition: color 0.3s; }
+        .mobile-menu a:hover { color: var(--tierra); }
+
+        /* Hero */
+        .page-hero {
+            background: var(--negro);
+            color: var(--blanco-puro);
+            padding: 10rem 4rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(139,115,85,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page-hero-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero .label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--oro);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-hero p {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--niebla);
+            max-width: 550px;
+            line-height: 1.8;
+        }
+
+        /* Section commons */
+        .section-inner { max-width: 1400px; margin: 0 auto; padding: 0 4rem; }
+        .section-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--tierra);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* Filters */
+        .filters {
+            padding: 2.5rem 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--gris-muy-claro);
+            position: sticky;
+            top: 52px;
+            z-index: 100;
+            background: rgba(248,246,241,0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .filter-btn {
+            padding: 0.55rem 1.4rem;
+            border: 1px solid var(--gris-muy-claro);
+            background: transparent;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            color: var(--gris-medio);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--negro);
+            color: var(--blanco-puro);
+            border-color: var(--negro);
+        }
+
+        /* Gallery Grid */
+        .gallery-section { padding: 0 0 4rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 220px;
+            gap: 4px;
+        }
+
+        .gallery-item {
+            background: var(--gris-oscuro);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            transition: background 0.4s;
+        }
+        .gallery-item:hover::after { background: rgba(0,0,0,0.15); }
+
+        .gallery-item.span-2 { grid-column: span 2; }
+        .gallery-item.span-row-2 { grid-row: span 2; }
+
+        .gallery-item .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: var(--blanco-puro);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+        }
+        .gallery-item:hover .caption { opacity: 1; }
+        .gallery-item .caption h4 { font-family: 'Lora',serif; font-size: 0.85rem; font-weight: 400; margin-bottom: 0.2rem; }
+        .gallery-item .caption p { font-family: 'DM Sans',sans-serif; font-size: 0.65rem; color: var(--niebla); letter-spacing: 1px; }
+
+        .gallery-item.video-item .placeholder-text::before { content: '▶ '; }
+
+        /* Videos Grid */
+        .videos-section {
+            background: var(--negro-suave);
+            color: var(--blanco-puro);
+            padding: 6rem 0;
+        }
+
+        .videos-section .section-label { color: var(--oro); }
+
+        .videos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .videos-header .section-subtitle {
+            color: var(--niebla);
+            font-style: italic;
+            font-size: 1rem;
+            max-width: 400px;
+            text-align: right;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .video-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        .video-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(201,169,98,0.2);
+            transform: translateY(-3px);
+        }
+
+        .video-thumbnail {
+            aspect-ratio: 16/9;
+            background: var(--gris-oscuro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-icon {
+            width: 48px;
+            height: 48px;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .video-card:hover .play-icon { border-color: var(--oro); }
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 14px solid rgba(255,255,255,0.7);
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            margin-left: 3px;
+        }
+        .video-card:hover .play-icon::after { border-left-color: var(--oro); }
+
+        .video-duration {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0,0,0,0.8);
+            color: var(--blanco-puro);
+            padding: 0.15rem 0.5rem;
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.7rem;
+        }
+
+        .video-info { padding: 1.3rem; }
+        .video-title { font-family: 'Lora',serif; font-size: 0.95rem; margin-bottom: 0.4rem; font-weight: 400; line-height: 1.4; }
+        .video-meta { font-family: 'DM Sans',sans-serif; font-size: 0.7rem; letter-spacing: 1px; color: var(--gris-claro); }
+
+        /* Instagram Section */
+        .instagram-section {
+            background: var(--blanco-hueso);
+            padding: 6rem 0;
+        }
+
+        .instagram-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .instagram-header .section-subtitle {
+            color: var(--gris-medio);
+            font-style: italic;
+            font-size: 1rem;
+            max-width: 400px;
+            text-align: right;
+        }
+
+        .instagram-handle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: var(--tierra);
+            margin-top: 0.5rem;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 2.5rem;
+        }
+
+        .insta-item {
+            aspect-ratio: 1;
+            background: var(--gris-oscuro);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .insta-item:hover { transform: scale(1.02); z-index: 10; }
+
+        .insta-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            transition: background 0.3s;
+        }
+        .insta-item:hover::after { background: rgba(0,0,0,0.2); }
+
+        .insta-item .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+            z-index: 2;
+        }
+
+        .insta-item .insta-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+        }
+
+        .insta-item:hover .insta-overlay { opacity: 1; }
+
+        .insta-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--blanco-puro);
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .insta-stat svg { width: 16px; height: 16px; fill: var(--blanco-puro); }
+
+        .instagram-cta {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .instagram-cta p {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: var(--gris-medio);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border: 1px solid var(--negro);
+            background: transparent;
+            color: var(--negro);
+            cursor: pointer;
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { background: var(--negro); color: var(--blanco-puro); }
+
+        .btn-tierra { color: var(--tierra); border-color: var(--tierra); }
+        .btn-tierra:hover { background: var(--tierra); color: var(--blanco-puro); }
+
+        .btn-outline-white { color: var(--blanco-puro); border-color: rgba(255,255,255,0.3); }
+        .btn-outline-white:hover { background: var(--blanco-puro); color: var(--negro); border-color: var(--blanco-puro); }
+
+        /* Footer */
+        footer {
+            background: var(--negro);
+            color: var(--blanco-puro);
+            padding: 5rem 0 2rem;
+        }
+        .footer-inner { max-width: 1400px; margin: 0 auto; padding: 0 4rem; }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-brand .logo-text { font-family: 'Playfair Display',serif; font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 1.2rem; }
+        .footer-brand p { color: var(--gris-claro); font-size: 0.88rem; line-height: 1.8; max-width: 300px; }
+        .footer-col h5 { font-family: 'DM Sans',sans-serif; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gris-claro); margin-bottom: 1.2rem; }
+        .footer-col a { display: block; color: var(--niebla); text-decoration: none; font-size: 0.88rem; margin-bottom: 0.7rem; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--oro); }
+        .social-links { display: flex; gap: 1.5rem; margin-top: 1rem; }
+        .social-links a { font-family: 'DM Sans',sans-serif; font-size: 0.72rem; letter-spacing: 1px; color: var(--gris-claro); text-decoration: none; transition: color 0.3s; }
+        .social-links a:hover { color: var(--oro); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            font-family: 'DM Sans',sans-serif;
+            font-size: 0.72rem;
+            color: var(--gris-medio);
+        }
+        .footer-bottom .tagline { font-family: 'Lora',serif; font-style: italic; font-size: 0.85rem; color: var(--gris-claro); }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .section-inner { padding: 0 2.5rem; }
+            .page-hero { padding: 8rem 2.5rem 4rem; }
+            .videos-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .mobile-menu { display: none; }
+            .mobile-menu.active { display: flex; }
+
+            .page-hero { padding: 7rem 1.5rem 3rem; }
+
+            .section-inner { padding: 0 1.5rem; }
+
+            .filters { padding: 1.5rem 0; gap: 0.5rem; overflow-x: auto; flex-wrap: nowrap; }
+            .filter-btn { white-space: nowrap; }
+
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+            .gallery-item.span-2, .gallery-item.span-row-2 { grid-column: span 1; grid-row: span 1; }
+
+            .videos-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .videos-header .section-subtitle { text-align: left; }
+            .videos-grid { grid-template-columns: 1fr; }
+
+            .instagram-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .instagram-header .section-subtitle { text-align: left; }
+            .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html#historia">El Camino</a></li>
+            <li><a href="index.html#videos">El Archivo</a></li>
+            <li><a href="blog.html">Diarios de Ruta</a></li>
+            <li><a href="galeria.html" class="active">Instantes</a></li>
+            <li><a href="tienda.html">La Tienda</a></li>
+            <li><a href="index.html#comunidad">Los Caminantes</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#historia" onclick="closeMenu()">El Camino</a>
+        <a href="index.html#videos" onclick="closeMenu()">El Archivo</a>
+        <a href="blog.html" onclick="closeMenu()">Diarios de Ruta</a>
+        <a href="galeria.html" onclick="closeMenu()">Instantes</a>
+        <a href="tienda.html" onclick="closeMenu()">La Tienda</a>
+        <a href="index.html#comunidad" onclick="closeMenu()">Los Caminantes</a>
+    </div>
+
+    <!-- Hero -->
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <span class="label">Galería</span>
+            <h1>Instantes</h1>
+            <p>Lo que veo cuando pedaleo. Lo que encuentro cuando me detengo. Cada imagen es un fragmento del camino que no se puede explicar con palabras.</p>
+        </div>
+    </header>
+
+    <!-- Filters -->
+    <div class="section-inner">
+        <div class="filters">
+            <button class="filter-btn active">Todas</button>
+            <button class="filter-btn">Paisajes</button>
+            <button class="filter-btn">Gente</button>
+            <button class="filter-btn">Páramos</button>
+            <button class="filter-btn">Rutas</button>
+            <button class="filter-btn">Videos</button>
+        </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item span-2"><span class="placeholder-text">Panorámica</span><div class="caption"><h4>Amanecer en el Páramo</h4><p>Chingaza, 2024</p></div></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span><div class="caption"><h4>El camino verde</h4><p>Boyacá</p></div></div>
+            <div class="gallery-item span-row-2"><span class="placeholder-text">Foto</span><div class="caption"><h4>Don Abelino</h4><p>Guasca, 2026</p></div></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item video-item"><span class="placeholder-text">Video</span><div class="caption"><h4>Relatos del Camino</h4><p>Episodio 1</p></div></div>
+            <div class="gallery-item span-2"><span class="placeholder-text">Panorámica</span><div class="caption"><h4>La trocha infinita</h4><p>Norte de Santander</p></div></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item video-item"><span class="placeholder-text">Video</span></div>
+            <div class="gallery-item span-2"><span class="placeholder-text">Panorámica</span><div class="caption"><h4>Niebla en la montaña</h4><p>Cundinamarca</p></div></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item span-row-2"><span class="placeholder-text">Foto</span><div class="caption"><h4>Frailejones</h4><p>Páramo de la Cuchilla</p></div></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item span-2"><span class="placeholder-text">Panorámica</span></div>
+            <div class="gallery-item video-item"><span class="placeholder-text">Video</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+            <div class="gallery-item"><span class="placeholder-text">Foto</span></div>
+        </div>
+    </div>
+
+    <!-- Videos Section -->
+    <section class="videos-section">
+        <div class="section-inner">
+            <div class="videos-header reveal">
+                <div>
+                    <span class="section-label">Relatos en movimiento</span>
+                    <h2 class="section-title" style="color: var(--blanco-puro);">Videos</h2>
+                </div>
+                <p class="section-subtitle">Historias que solo el video puede contar. El movimiento, el sonido, el viento.</p>
+            </div>
+
+            <div class="videos-grid reveal">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">2:30</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">La Ruta de los Olvidados — Trailer</h3>
+                        <p class="video-meta">Documental • 2 min</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">6:15</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Relatos del Camino: Guasca</h3>
+                        <p class="video-meta">Episodio 1 • 6 min</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">1:30</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">¿Qué hay detrás de las montañas?</h3>
+                        <p class="video-meta">Reflexión • 1.5 min</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">3:45</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Detrás de cámaras: Chingaza</h3>
+                        <p class="video-meta">Behind the scenes • 4 min</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">4:20</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Mi primer viaje en bicicleta</h3>
+                        <p class="video-meta">Historia • 4 min</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon"></div>
+                        <span class="video-duration">8:10</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Cómo preparar tu primera trocha</h3>
+                        <p class="video-meta">Tutorial • 8 min</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;" class="reveal">
+                <a href="#" class="btn btn-outline-white">Ver todos los videos →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section -->
+    <section class="instagram-section">
+        <div class="section-inner">
+            <div class="instagram-header reveal">
+                <div>
+                    <span class="section-label">Síguenos</span>
+                    <h2 class="section-title">Desde Instagram</h2>
+                    <p class="instagram-handle">@agarrandotrochacol</p>
+                </div>
+                <p class="section-subtitle">El camino también se cuenta en fragmentos. Fotos sueltas, momentos robados, historias del día a día.</p>
+            </div>
+
+            <div class="instagram-grid reveal">
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            127
+                        </span>
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+                            8
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            89
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Reel</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            203
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            156
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            94
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Reel</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            312
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            68
+                        </span>
+                    </div>
+                </div>
+                <div class="insta-item">
+                    <span class="placeholder-text">Post</span>
+                    <div class="insta-overlay">
+                        <span class="insta-stat">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            145
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instagram-cta reveal">
+                <p>El feed se actualiza con cada viaje. Cada trocha tiene su historia.</p>
+                <a href="https://instagram.com/agarrandotrochacol" class="btn btn-tierra" target="_blank">Seguir en Instagram →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo-text">AGARRANDO TROCHA</div>
+                    <p>Explorando Colombia en bicicleta, por trochas y caminos que no aparecen en los mapas.</p>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">YouTube</a>
+                        <a href="#">TikTok</a>
+                        <a href="#">Threads</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Navegar</h5>
+                    <a href="index.html#historia">El Camino</a>
+                    <a href="index.html#videos">El Archivo</a>
+                    <a href="blog.html">Diarios de Ruta</a>
+                    <a href="galeria.html">Instantes</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Más</h5>
+                    <a href="tienda.html">La Tienda</a>
+                    <a href="index.html#comunidad">Los Caminantes</a>
+                    <a href="#">Contacto</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Contacto</h5>
+                    <a href="#">hola@agarrandotrocha.com</a>
+                    <a href="#">@agarrandotrochacol</a>
+                    <a href="#">Bogotá, Colombia</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Agarrando Trocha</span>
+                <span class="tagline">Con amor, desde las montañas de Colombia</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        function closeMenu() {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

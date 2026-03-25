@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agarrando Trocha — Wireframe v2.0</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+Pro:wght@300;400;600&family=DM+Sans:wght@400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --negro: #0d0d0d;
+            --gris-oscuro: #2a2a2a;
+            --gris-medio: #6b6b6b;
+            --gris-claro: #999;
+            --gris-muy-claro: #d4d0c8;
+            --blanco-hueso: #f2efe8;
+            --blanco-puro: #ffffff;
+            --tierra: #8B7355;
+            --oro: #C9A962;
+        }
+        
+        body {
+            font-family: 'Source Serif Pro', Georgia, serif;
+            background: var(--blanco-hueso);
+            color: var(--negro);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .page {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background: var(--blanco-puro);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 2px solid var(--negro);
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--gris-medio);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .header .meta {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--gris-claro);
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background: var(--tierra);
+            color: var(--blanco-puro);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            margin-top: 15px;
+        }
+        
+        .section { margin-bottom: 50px; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--negro);
+        }
+        
+        .subsection-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gris-oscuro);
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+        
+        .url-box {
+            background: var(--negro);
+            color: var(--blanco-puro);
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .url-box .label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gris-claro);
+            margin-bottom: 10px;
+        }
+        
+        .url-box .url {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+        
+        ul, ol { margin-left: 25px; margin-bottom: 20px; }
+        li { margin-bottom: 8px; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gris-muy-claro);
+        }
+        
+        th {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--blanco-hueso);
+        }
+        
+        .card {
+            background: var(--blanco-puro);
+            border: 1px solid var(--gris-muy-claro);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background: var(--blanco-hueso);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-left: 4px solid var(--tierra);
+            font-style: italic;
+        }
+        
+        .checklist { list-style: none; margin-left: 0; }
+        .checklist li {
+            padding-left: 25px;
+            position: relative;
+        }
+        .checklist li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: var(--tierra);
+            font-weight: bold;
+        }
+        
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .changelog-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gris-muy-claro);
+        }
+        
+        .changelog-item .tag {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+        
+        .tag-new { background: var(--tierra); color: var(--blanco-puro); }
+        .tag-updated { background: var(--oro); color: var(--negro); }
+        .tag-added { background: var(--gris-oscuro); color: var(--blanco-puro); }
+        
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--gris-muy-claro);
+            margin-top: 60px;
+            font-size: 0.85rem;
+            color: var(--gris-claro);
+        }
+        
+        @media print {
+            body { background: white; }
+            .page { padding: 0; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <h1>AGARRANDO TROCHA</h1>
+            <h2>Wireframe y Especificación del Sitio Web</h2>
+            <div class="meta">
+                Versión 2.0 &bull; Marzo 2026
+            </div>
+            <div class="version-badge">Prototipo Editorial Rediseñado</div>
+        </header>
+
+        <!-- URLs -->
+        <div class="url-box">
+            <div class="label">Prototipo Funcional (v2.0)</div>
+            <div class="url">agarrando-trocha.surge.sh</div>
+        </div>
+
+        <!-- Changelog -->
+        <section class="section">
+            <h3 class="section-title">Novedades v2.0</h3>
+            
+            <div class="changelog-item">
+                <span class="tag tag-new">Nuevo</span>
+                <strong>Diseño editorial full-width</strong> — Todas las secciones aprovechan el ancho completo en desktop. Layouts asimétricos y composiciones cinematográficas.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-new">Nuevo</span>
+                <strong>Tipografía editorial</strong> — Playfair Display (títulos), Lora (texto), DM Sans (labels). Imports desde Google Fonts.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-new">Nuevo</span>
+                <strong>Paleta cálida</strong> — Tierra (#8B7355), Oro (#C9A962), Negro profundo (#0d0d0d) + Blanco hueso (#f2efe8). Film grain overlay sutil.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-new">Nuevo</span>
+                <strong>Instagram Feed</strong> — Sección dedicada en la galería (Instantes) con grid 4x2, overlay de likes/comentarios, y CTA a @agarrandotrochacol.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-updated">Mejorado</span>
+                <strong>Hero cinematográfico</strong> — Full viewport, animaciones staggered, degradado orgánico, tipografía responsive con clamp().
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-updated">Mejorado</span>
+                <strong>Navegación</strong> — Glassmorphism con backdrop-filter blur, efecto scroll, underline animado en links.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-updated">Mejorado</span>
+                <strong>Blog</strong> — Layout editorial de revista con featured post grande, grid de 2 columnas, lista de archivo numerada.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-added">Añadido</span>
+                <strong>Scroll reveal</strong> — IntersectionObserver para animaciones de entrada en todas las secciones.
+            </div>
+            <div class="changelog-item">
+                <span class="tag tag-added">Añadido</span>
+                <strong>Sección Arte</strong> — Nueva categoría en la tienda para fotografías fine art y posters.
+            </div>
+        </section>
+
+        <!-- Páginas -->
+        <section class="section">
+            <h3 class="section-title">Páginas del Prototipo v2.0</h3>
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-title">Home (index.html)</div>
+                    <p>Hero cinematográfico full-width. Secciones: El Camino (historia + foto), Stats (barra oscura), Filosofía (quotes), Timeline, El Archivo (videos featured + grid), Diarios de Ruta (blog preview), Instantes (gallery grid), Los Caminantes (comunidad + opciones de apoyo).</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Galería (galeria.html)</div>
+                    <p>Hero editorial. Filtros sticky. Grid editorial variado (6 columnas, panorámicas + verticales). Sección Videos (3 columnas). Sección Instagram Feed (4x2 grid con overlays de engagement). Totalmente full-width.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Blog (blog.html)</div>
+                    <p>Hero editorial. Filtros de categorías. Featured post (imagen + contenido lado a lado). Grid editorial 2x2 (cada card con imagen y texto). Quote intermedio. Lista de archivo numerada. Paginación.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Tienda (tienda.html)</div>
+                    <p>Hero editorial. Bento Grid full-width con producto estrella (Pocillo Peltre). Secciones: Ropa (4 columnas claro), Accesorios (4 columnas oscuro), Arte (2 columnas). Nota WhatsApp.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section class="section">
+            <h3 class="section-title">Características del Prototipo</h3>
+            <ul class="checklist">
+                <li>Diseño editorial full-width en todas las secciones desktop</li>
+                <li>Estilo: mezcla de diario de bitácora + documental cinematográfico</li>
+                <li>Tipografía: Playfair Display + Lora + DM Sans (Google Fonts)</li>
+                <li>Paleta: Tierra, Oro, Negro profundo, Blanco hueso</li>
+                <li>Textura grain/noise sutil (film grain overlay)</li>
+                <li>Hero sections cinematográficas a viewport completo</li>
+                <li>Layouts asimétricos con composiciones editoriales</li>
+                <li>Scroll reveal animations (IntersectionObserver)</li>
+                <li>Navegación con glassmorphism y efecto scroll</li>
+                <li>Menú hamburguesa para móvil</li>
+                <li>Navegación completa entre páginas</li>
+                <li>Videos organizados en grid con filtros</li>
+                <li>Blog editorial con featured post y categorías</li>
+                <li>Galería de fotos con grid variado y filtros</li>
+                <li>Instagram Feed en galería (grid 4x2 con overlays)</li>
+                <li>Tienda estilo Bento Grid con producto estrella</li>
+                <li>Secciones de comunidad y apoyo</li>
+                <li>Totalmente responsive (móvil y desktop)</li>
+                <li>Footer completo con 4 columnas</li>
+            </ul>
+        </section>
+
+        <!-- Identidad -->
+        <section class="section">
+            <h3 class="section-title">1. Identidad de Marca v2.0</h3>
+            
+            <h4 class="subsection-title">1.1 Dirección Estética</h4>
+            <p><strong>Diario de bitácora cinematográfico.</strong> Una mezcla entre la intimidad de un field journal personal y la espectacularidad de un documental de National Geographic. Camilo es cineasta, y el sitio debe reflejar esa mirada fílmica: composiciones dramáticas, tonos cálidos de tierra y oro, tipografía que evoca manuscritos de viaje, y layouts que respiran como los valles que recorre.</p>
+            
+            <h4 class="subsection-title">1.2 Paleta de Colores v2.0</h4>
+            <table>
+                <tr><th>Color</th><th>Hex</th><th>Uso</th></tr>
+                <tr><td>Negro Profundo</td><td>#0d0d0d</td><td>Heros oscuros, secciones dramáticas, footer</td></tr>
+                <tr><td>Tierra</td><td>#8B7355</td><td>Labels, acentos, bordes, CTAs secundarios</td></tr>
+                <tr><td>Oro</td><td>#C9A962</td><td>Acentos dorados, badges, highlights en secciones oscuras</td></tr>
+                <tr><td>Blanco Hueso</td><td>#f2efe8</td><td>Fondos alternos, secciones de respiro</td></tr>
+                <tr><td>Blanco Cálido</td><td>#f8f6f1</td><td>Fondo principal del sitio</td></tr>
+                <tr><td>Niebla</td><td>#B8C5C9</td><td>Textos secundarios en fondos oscuros</td></tr>
+            </table>
+            
+            <h4 class="subsection-title">1.3 Tipografía v2.0</h4>
+            <table>
+                <tr><th>Rol</th><th>Familia</th><th>Carácter</th></tr>
+                <tr><td>Títulos (h1-h3)</td><td>Playfair Display</td><td>Elegante, serif, con peso y dramatismo</td></tr>
+                <tr><td>Texto (body)</td><td>Lora</td><td>Legible, cálida, con personalidad editorial</td></tr>
+                <tr><td>Labels/UI</td><td>DM Sans</td><td>Limpia, moderna, para navegación y elementos de interfaz</td></tr>
+            </table>
+            
+            <h4 class="subsection-title">1.4 Efectos Visuales</h4>
+            <ul>
+                <li><strong>Film grain overlay:</strong> SVG noise filter con opacidad 2.5% sobre todo el sitio</li>
+                <li><strong>Scroll reveal:</strong> Elementos aparecen con translateY + opacity al hacer scroll</li>
+                <li><strong>Glassmorphism nav:</strong> backdrop-filter: blur(20px) con fondo semi-transparente</li>
+                <li><strong>Hover effects:</strong> Transiciones suaves (0.3-0.4s), escalas sutiles, cambios de color</li>
+                <li><strong>Hero staggered:</strong> Animaciones con delay (0.3s, 0.5s, 0.7s, 0.9s) en carga</li>
+            </ul>
+        </section>
+
+        <!-- Estructura -->
+        <section class="section">
+            <h3 class="section-title">2. Estructura del Sitio</h3>
+            
+            <h4 class="subsection-title">Mapa del Sitio</h4>
+            <pre style="font-family: monospace; font-size: 0.85rem; line-height: 2; margin-bottom: 20px; padding: 20px; background: var(--blanco-hueso);">
+/
+├── Home (index.html)
+│   ├── Hero cinematográfico
+│   ├── El Camino (historia + foto)
+│   ├── Stats (4 métricas)
+│   ├── Filosofía (3 quotes)
+│   ├── Timeline (2021-2026)
+│   ├── El Archivo (videos)
+│   ├── Diarios de Ruta (blog preview)
+│   ├── Instantes (gallery preview)
+│   ├── Los Caminantes (comunidad)
+│   └── Footer
+├── Galería (galeria.html)
+│   ├── Hero editorial
+│   ├── Filtros sticky
+│   ├── Grid editorial variado
+│   ├── Videos (6 cards)
+│   └── Instagram Feed (8 posts)
+├── Blog (blog.html)
+│   ├── Hero editorial
+│   ├── Categorías
+│   ├── Featured post
+│   ├── Grid 2x2
+│   ├── Quote intermedio
+│   ├── Archivo numerado
+│   └── Paginación
+└── Tienda (tienda.html)
+    ├── Hero editorial
+    ├── Bento Grid (producto estrella)
+    ├── Ropa (4 productos)
+    ├── Accesorios (4 productos)
+    ├── Arte (2 productos)
+    └── Nota WhatsApp
+            </pre>
+        </section>
+
+        <!-- Instagram -->
+        <section class="section">
+            <h3 class="section-title">3. Instagram Feed</h3>
+            
+            <h4 class="subsection-title">Implementación en el Prototipo</h4>
+            <p>Sección dedicada en <strong>galeria.html</strong> con:</p>
+            <ul>
+                <li>Grid 4x2 de posts placeholder con estilos de Instagram</li>
+                <li>Overlay en hover con iconos de likes (corazón) y comentarios</li>
+                <li>Contadores de engagement simulados (89-312 likes)</li>
+                <li>Mix de posts cuadrados y Reels</li>
+                <li>CTA "Seguir en Instagram" con link a @agarrandotrochacol</li>
+            </ul>
+            
+            <h4 class="subsection-title">Implementación Futura (Next.js)</h4>
+            <p>En la versión React/Next.js se integrará:</p>
+            <ul>
+                <li>Embed nativo de Instagram (@agarrandotrochacol) con actualización automática</li>
+                <li>Componente React para renderizar el feed dinámicamente</li>
+                <li>Lazy loading de imágenes para performance</li>
+                <li>Layout Masonry para composiciones orgánicas</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>Nota:</strong> Instagram es el medio principal por el que Camilo llega a su audiencia. La sección del feed en el sitio web refuerza ese canal y convierte visitantes del web en seguidores.
+            </div>
+        </section>
+
+        <!-- Comunidad -->
+        <section class="section">
+            <h3 class="section-title">4. Comunidad — Los Caminantes</h3>
+            
+            <h4 class="subsection-title">Opciones de Apoyo</h4>
+            <table>
+                <tr><th>Tipo</th><th>Nombre</th><th>Precio</th><th>Beneficios</th></tr>
+                <tr><td>Aporte único</td><td>Una taza de café</td><td>$15.000 COP</td><td>Para el termo de siempre</td></tr>
+                <tr><td>Aporte único</td><td>Un pedaleo</td><td>$50.000 COP</td><td>Para la siguiente montaña</td></tr>
+                <tr><td>Aporte único</td><td>Una trocha</td><td>$150.000 COP</td><td>Para un tramo del camino</td></tr>
+                <tr><td>Membresía</td><td>Caminante</td><td>$35.000/mes</td><td>Acceso anticipado, sticker, chat</td></tr>
+                <tr><td>Membresía</td><td>Alma de Trocha</td><td>$100.000/mes</td><td>Foto mensual, créditos, 10% tienda</td></tr>
+            </table>
+            
+            <div class="highlight">
+                <em>"No es una donación. Es compañía en el camino."</em>
+            </div>
+        </section>
+
+        <!-- Producto Estrella -->
+        <section class="section">
+            <h3 class="section-title">5. Producto Estrella</h3>
+            <div class="card">
+                <div class="card-title">El Broche del Camino — Pocillo Peltre</div>
+                <p><strong>Precio:</strong> $45.000 COP</p>
+                <p style="margin-top: 10px;">Acero vintage. Para el café de la mañana en cualquier montaña. Resistente, clásico, sin pretensiones. Cada pieza es única. Presentado en Bento Grid full-width como hero de la tienda.</p>
+            </div>
+        </section>
+
+        <!-- Fases -->
+        <section class="section">
+            <h3 class="section-title">6. Fases de Desarrollo</h3>
+            
+            <h4 class="subsection-title">Fase 1 (MVP) — Completado</h4>
+            <ul class="checklist">
+                <li>Home con hero cinematográfico</li>
+                <li>Navegación entre páginas</li>
+                <li>Blog con categorías</li>
+                <li>Galería con filtros</li>
+                <li>Tienda con Bento Grid</li>
+                <li>Sección de comunidad</li>
+                <li>Responsive móvil</li>
+            </ul>
+            
+            <h4 class="subsection-title">Fase 2 (v2.0) — Completado</h4>
+            <ul class="checklist">
+                <li>Diseño editorial full-width</li>
+                <li>Tipografía distintiva (Playfair + Lora + DM Sans)</li>
+                <li>Paleta cálida (Tierra, Oro, Negro profundo)</li>
+                <li>Textura film grain</li>
+                <li>Animaciones scroll reveal</li>
+                <li>Navegación glassmorphism</li>
+                <li>Instagram Feed en galería</li>
+                <li>Blog layout editorial de revista</li>
+                <li>Composiciones asimétricas</li>
+                <li>Sección Arte en tienda</li>
+            </ul>
+            
+            <h4 class="subsection-title">Fase 3 (Next.js) — Próxima</h4>
+            <ul>
+                <li>Migración a React/Next.js con componentes</li>
+                <li>Instagram embed real con API</li>
+                <li>Integración de pagos (Wompi/Epayco)</li>
+                <li>Tienda completa con checkout</li>
+                <li>Videos reales de YouTube embebidos</li>
+                <li>CMS para blog (Notion/Sanity)</li>
+                <li>SEO y analytics</li>
+                <li>Dominio personalizado</li>
+            </ul>
+        </section>
+
+        <!-- Pendientes -->
+        <section class="section">
+            <h3 class="section-title">7. Pendientes de Camilo</h3>
+            <ul>
+                <li>Número de WhatsApp para tienda y contacto</li>
+                <li>Número de Nequi para aportes</li>
+                <li>Número de cuenta Bancolombia</li>
+                <li>Correo electrónico de contacto</li>
+                <li>Fotos de Camilo (perfil, en bicicleta, etc.)</li>
+                <li>Videos en alta calidad para embeber</li>
+                <li>Fotografías de productos para la tienda</li>
+                <li>Lista final de productos con precios</li>
+                <li>Aprobación de diseño editorial</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Documento creado para el desarrollo del sitio web de Agarrando Trocha</p>
+            <p style="margin-top: 10px;">Versión 2.0 &bull; Marzo 2026</p>
+            <p style="margin-top: 20px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--tierra);">Con amor, desde las montañas de Colombia</p>
+        </footer>
+    </div>
+</body>
+</html>
