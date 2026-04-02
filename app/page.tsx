@@ -37,6 +37,7 @@ export default function HomePage() {
           fill 
           priority
           className="object-cover"
+          unoptimized={true}
         />
         <div className="absolute inset-0 bg-black/40" />
         
@@ -132,6 +133,7 @@ export default function HomePage() {
                   alt="Camilo Medina en el páramo" 
                   fill 
                   className="object-cover"
+                  unoptimized={true}
                 />
               </div>
             </motion.div>
@@ -150,6 +152,7 @@ export default function HomePage() {
             alt="Agarrando Trocha - Descanso en el camino" 
             fill 
             className="object-cover"
+            unoptimized={true}
           />
           <div className="absolute inset-0 bg-black/60" />
         </motion.div>
@@ -200,7 +203,7 @@ export default function HomePage() {
               className="space-y-12"
             >
               <div className="relative aspect-square">
-                <Image src="/images/home/23.jpg" alt="Departamento de Boyaca" fill className="object-cover" />
+                <Image src="/images/home/23.jpg" alt="Departamento de Boyaca" fill className="object-cover" unoptimized={true} />
               </div>
               <p className="text-lg text-black/70 leading-relaxed font-medium">
                 La bicicleta no es solo transporte, es un puente para conectar realidades y despertar empatía. Viajar por Colombia nace en el corazón de Agarrando Trocha. Un viaje que se despliega sobre dos ruedas, atravesando los vastos paisajes: llanos que se extienden como océanos de tierra, las sombras profundas del piedemonte amazónico y las cumbres imponentes de la cordillera oriental.
@@ -215,7 +218,7 @@ export default function HomePage() {
               className="space-y-12 md:mt-24"
             >
               <div className="relative aspect-square">
-                <Image src="/images/home/30.jpg" alt="Parque Chingaza" fill className="object-cover" />
+                <Image src="/images/home/30.jpg" alt="Parque Chingaza" fill className="object-cover" unoptimized={true} />
               </div>
               <p className="text-lg text-black/70 leading-relaxed font-medium">
                 Desde la bicicleta, cada movimiento es un acto de memoria, un desafío al olvido. Es una ruta que corta páramos envueltos en niebla, penetra selvas que susurran secretos antiguos y cruza ríos que murmuran resistencias. Un camino donde la naturaleza es testigo y cómplice, y donde los kilómetros no solo miden distancia, sino historias de lucha, identidad y arraigo.
@@ -260,6 +263,7 @@ export default function HomePage() {
                   alt="Camilo Medina Portrait" 
                   fill 
                   className="object-cover"
+                  unoptimized={true}
                 />
               </div>
             </motion.div>
@@ -288,7 +292,7 @@ export default function HomePage() {
                 transition={fadeInUp.transition}
                 className={`relative aspect-[4/3] ${img.span}`}
               >
-                <Image src={img.src} alt={img.alt} fill className="object-cover" />
+                <Image src={img.src} alt={img.alt} fill className="object-cover" unoptimized={true} />
               </motion.div>
             ))}
           </div>

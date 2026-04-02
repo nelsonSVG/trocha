@@ -350,6 +350,7 @@ export default function ArchivoPage() {
                           alt={item.title || ''} 
                           fill
                           className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                          unoptimized={true}
                         />
                         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white p-6">
                           <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-500">
@@ -369,6 +370,7 @@ export default function ArchivoPage() {
                           width={800}
                           height={1000}
                           className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                          unoptimized={true}
                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                           <div className="text-white space-y-2">
@@ -438,6 +440,7 @@ export default function ArchivoPage() {
                               alt={selectedItem.title || ''} 
                               fill
                               className="object-cover opacity-40"
+                              unoptimized={true}
                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                                <div className="p-8 border border-white/20 rounded-full text-white flex flex-col items-center gap-4">
@@ -454,6 +457,7 @@ export default function ArchivoPage() {
                           fill
                           className="object-contain"
                           priority
+                          unoptimized={true}
                         />
                       )}
                     </motion.div>

@@ -231,6 +231,7 @@ export default function BlogPost({ params }: { params: Promise<{ slug: string }>
             fill 
             className="object-cover"
             priority
+            unoptimized={true}
           />
         </div>
 
@@ -283,6 +284,7 @@ export default function BlogPost({ params }: { params: Promise<{ slug: string }>
                               alt={img.alt} 
                               fill 
                               className="object-cover transition-transform duration-700 group-hover:scale-105"
+                              unoptimized={true}
                             />
                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                                 <p className="text-white text-[10px] font-mono uppercase tracking-[0.2em]">{img.alt}</p>
@@ -356,6 +358,7 @@ export default function BlogPost({ params }: { params: Promise<{ slug: string }>
                             fill
                             className="object-contain"
                             priority
+                            unoptimized={true}
                         />
                     </motion.div>
                 </AnimatePresence>

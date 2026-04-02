@@ -102,6 +102,7 @@ export function InstagramFeed() {
                   alt="Instante de ruta real" 
                   fill 
                   className="object-cover transition-transform duration-[2.5s] group-hover:scale-110"
+                  unoptimized={true}
                 />
 
                 {/* Overlay */}
