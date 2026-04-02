@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -22,15 +22,39 @@ const HERO_IMAGES = [
   { src: '/images/rutas/el-empiezo/11032023-IMG_1515.jpg', alt: 'Paisaje de Ruta El Empiezo' },
 ];
 
+// Zoom configurations per image for varied Ken Burns effect
+const ZOOM_CONFIGS = [
+  { scale: [1, 1.06, 1], duration: 18 },
+  { scale: [1.06, 1, 1.06], duration: 22 },
+  { scale: [1, 1.04, 1], duration: 20 },
+  { scale: [1.04, 1, 1.04], duration: 16 },
+  { scale: [1, 1.05, 1], duration: 24 },
+  { scale: [1.05, 1, 1.05], duration: 19 },
+  { scale: [1, 1.07, 1], duration: 21 },
+  { scale: [1.03, 1, 1.03], duration: 17 },
+  { scale: [1, 1.05, 1], duration: 23 },
+  { scale: [1.05, 1, 1.05], duration: 20 },
+];
+
 export default function HomePage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+      setIsTransitioning(true);
+      const newNext = (nextIndex + 1) % HERO_IMAGES.length;
+      setNextIndex(newNext);
+      
+      // After fade completes, swap indices
+      setTimeout(() => {
+        setCurrentIndex(nextIndex);
+        setIsTransitioning(false);
+      }, 1500);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [nextIndex]);
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -52,24 +76,65 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-        <AnimatePresence mode="wait">
+        {/* Current image layer */}
+        <motion.div
+          className="absolute inset-0 overflow-hidden"
+          style={{ zIndex: 1 }}
+        >
           <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute inset-0"
+            animate={{
+              scale: ZOOM_CONFIGS[currentIndex].scale,
+            }}
+            transition={{
+              duration: ZOOM_CONFIGS[currentIndex].duration,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            }}
+            className="relative w-full h-full"
           >
             <Image 
-              src={HERO_IMAGES[currentImageIndex].src} 
-              alt={HERO_IMAGES[currentImageIndex].alt} 
+              src={HERO_IMAGES[currentIndex].src} 
+              alt={HERO_IMAGES[currentIndex].alt} 
               fill 
-              priority={currentImageIndex === 0}
+              priority={currentIndex === 0}
               className="object-cover"
             />
           </motion.div>
-        </AnimatePresence>
+        </motion.div>
+
+        {/* Next image layer - fades in during transition */}
+        <motion.div
+          className="absolute inset-0 overflow-hidden"
+          style={{ zIndex: 2 }}
+          animate={{
+            opacity: isTransitioning ? 1 : 0,
+          }}
+          transition={{
+            duration: 1.5,
+            ease: [0.4, 0, 0.2, 1],
+          }}
+        >
+          <motion.div
+            animate={{
+              scale: ZOOM_CONFIGS[nextIndex].scale,
+            }}
+            transition={{
+              duration: ZOOM_CONFIGS[nextIndex].duration,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+            }}
+            className="relative w-full h-full"
+          >
+            <Image 
+              src={HERO_IMAGES[nextIndex].src} 
+              alt={HERO_IMAGES[nextIndex].alt} 
+              fill 
+              className="object-cover"
+            />
+          </motion.div>
+        </motion.div>
         <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-20 text-center text-white px-6">
