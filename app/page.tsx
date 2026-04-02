@@ -22,19 +22,14 @@ const HERO_IMAGES = [
   { src: '/images/rutas/el-empiezo/11032023-IMG_1515.jpg', alt: 'Paisaje de Ruta El Empiezo' },
 ];
 
-// Zoom configurations per image for varied Ken Burns effect
-const ZOOM_CONFIGS = [
-  { scale: [1, 1.06, 1], duration: 18 },
-  { scale: [1.06, 1, 1.06], duration: 22 },
-  { scale: [1, 1.04, 1], duration: 20 },
-  { scale: [1.04, 1, 1.04], duration: 16 },
-  { scale: [1, 1.05, 1], duration: 24 },
-  { scale: [1.05, 1, 1.05], duration: 19 },
-  { scale: [1, 1.07, 1], duration: 21 },
-  { scale: [1.03, 1, 1.03], duration: 17 },
-  { scale: [1, 1.05, 1], duration: 23 },
-  { scale: [1.05, 1, 1.05], duration: 20 },
-];
+// Hero image Ken Burns effect - consistent zoom-in for all images
+const HERO_ZOOM = {
+  scale: [1, 1.05] as [number, number],
+  duration: 20,
+  ease: "easeOut" as const,
+  repeat: Infinity,
+  repeatType: "reverse" as const,
+};
 
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,19 +37,24 @@ export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsTransitioning(true);
-      const newNext = (nextIndex + 1) % HERO_IMAGES.length;
-      setNextIndex(newNext);
-      
-      // After fade completes, swap indices
-      setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setIsTransitioning(false);
-      }, 1500);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [nextIndex]);
+    // 6-second delay before starting the slideshow
+    const initialTimeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        setNextIndex((prev) => {
+          const newNext = (prev + 1) % HERO_IMAGES.length;
+          setIsTransitioning(true);
+          setTimeout(() => {
+            setCurrentIndex(newNext);
+            setIsTransitioning(false);
+          }, 1500);
+          return newNext;
+        });
+      }, 5000);
+      return () => clearInterval(interval);
+    }, 6000);
+
+    return () => clearTimeout(initialTimeout);
+  }, []);
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -82,14 +82,12 @@ export default function HomePage() {
           style={{ zIndex: 1 }}
         >
           <motion.div
-            animate={{
-              scale: ZOOM_CONFIGS[currentIndex].scale,
-            }}
+            animate={{ scale: HERO_ZOOM.scale }}
             transition={{
-              duration: ZOOM_CONFIGS[currentIndex].duration,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
+              duration: HERO_ZOOM.duration,
+              repeat: HERO_ZOOM.repeat,
+              repeatType: HERO_ZOOM.repeatType,
+              ease: HERO_ZOOM.ease,
             }}
             className="relative w-full h-full"
           >
@@ -116,14 +114,12 @@ export default function HomePage() {
           }}
         >
           <motion.div
-            animate={{
-              scale: ZOOM_CONFIGS[nextIndex].scale,
-            }}
+            animate={{ scale: HERO_ZOOM.scale }}
             transition={{
-              duration: ZOOM_CONFIGS[nextIndex].duration,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
+              duration: HERO_ZOOM.duration,
+              repeat: HERO_ZOOM.repeat,
+              repeatType: HERO_ZOOM.repeatType,
+              ease: HERO_ZOOM.ease,
             }}
             className="relative w-full h-full"
           >
