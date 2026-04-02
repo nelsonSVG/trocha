@@ -24,10 +24,10 @@ export function Footer() {
 
         <nav className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-16 text-[10px] uppercase tracking-[0.2em] font-medium text-white/60">
           <Link href="/historia" className="hover:text-white transition-colors">El Camino</Link>
-          <Link href="/videos" className="hover:text-white transition-colors">Archivo</Link>
-          <Link href="/blog" className="hover:text-white transition-colors">Relatos</Link>
-          <Link href="/comunidad" className="hover:text-white transition-colors">Caminantes</Link>
-          <Link href="/tienda" className="hover:text-white transition-colors">Tienda</Link>
+          <Link href="/archivo" className="hover:text-white transition-colors">El Archivo</Link>
+          <Link href="/blog" className="hover:text-white transition-colors">Diarios de Ruta</Link>
+          <Link href="/comunidad" className="hover:text-white transition-colors">Los Caminantes</Link>
+          <Link href="/tienda" className="hover:text-white transition-colors">La Tienda</Link>
         </nav>
 
         <div className="flex space-x-12 mb-20">
