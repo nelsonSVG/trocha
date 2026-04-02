@@ -23,7 +23,7 @@ export default function HistoryPage() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-32 text-center">
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-8">CRONOLOGÍA / MEMORIA</span>
-            <h1 className="text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">EL CAMINO</h1>
+            <h1 className="text-5xl sm:text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">EL CAMINO</h1>
             <p className="text-2xl font-serif italic text-black/60 leading-relaxed max-w-3xl mx-auto">
               "Agarrando Trocha no nació como un proyecto. Nació cuando no tenía todo claro. Cuando improvisar fue la forma de volver a moverme."
             </p>

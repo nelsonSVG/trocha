@@ -300,7 +300,7 @@ export default function ArchivoPage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-32 text-center">
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-8">ARCHIVO COMPLETO</span>
-            <h1 className="text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">EL ARCHIVO</h1>
+            <h1 className="text-5xl sm:text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">EL ARCHIVO</h1>
             <p className="text-2xl font-serif italic text-black/60 max-w-2xl mx-auto">
               "Fragmentos de memoria, instantes de trocha y relatos visuales. Todo lo que hemos visto detrás de las montañas."
             </p>

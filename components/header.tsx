@@ -28,6 +28,15 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
   const isHome = pathname === '/';
   const showWhiteHeader = scrolled || !isHome;
 
@@ -91,49 +100,78 @@ export function Header() {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden p-2"
+          className={cn(
+            "md:hidden p-2 z-[60] transition-colors",
+            isOpen ? "text-black" : (showWhiteHeader ? "text-black" : "text-white")
+          )}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={20} strokeWidth={1} /> : <Menu size={20} strokeWidth={1} />}
+          {isOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
         </button>
       </nav>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav - Full Page */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 bg-white border-t border-black/10 shadow-2xl md:hidden"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 bg-white z-50 flex flex-col md:hidden"
           >
-            <div className="flex flex-col p-8 space-y-6">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "text-xl font-display tracking-tight",
-                    pathname === link.href ? "text-black" : "text-black/40"
-                  )}
+            {/* Mobile Header (Fixed within the full page menu) */}
+            <div className="p-8 border-b border-black/5 flex justify-between items-center">
+              <div className="flex items-center gap-4">
+                <img src="/logo-black.svg" alt="Logo" className="w-10 h-10" />
+                <div className="text-sm font-bold uppercase flex flex-col leading-none">
+                  <span>AGARRANDO</span>
+                  <span className="ml-4">TROCHA</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center items-center flex-grow p-8 space-y-10 text-center">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.1 }}
                 >
-                  {link.name}
-                </Link>
+                  <Link 
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "text-4xl font-display tracking-tight uppercase",
+                      pathname === link.href ? "text-black" : "text-black/40"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
-              <div className="pt-6 border-t border-black/5">
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="pt-12 border-t border-black/5 w-full flex flex-col items-center gap-8"
+              >
                 <a 
                   href="https://instagram.com/agarrandotrochacol" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-4 text-xl font-display tracking-tight text-black"
+                  className="flex items-center gap-4 text-sm font-mono tracking-[0.3em] uppercase text-black"
                 >
-                  <Instagram size={24} strokeWidth={1.5} />
-                  INSTAGRAM
+                  <Instagram size={20} />
+                  Instagram
                 </a>
-              </div>
+                <p className="text-[9px] font-mono text-black/30 uppercase tracking-[0.2em]">
+                  Documentando lo que hay detrás de las montañas
+                </p>
+              </motion.div>
             </div>
           </motion.div>
         )}

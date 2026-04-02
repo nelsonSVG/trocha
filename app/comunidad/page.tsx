@@ -36,7 +36,7 @@ export default function CommunityPage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-32 text-center">
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-8">COMUNIDAD / APOYO</span>
-            <h1 className="text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">LOS CAMINANTES</h1>
+            <h1 className="text-5xl sm:text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">LOS CAMINANTES</h1>
             <p className="text-2xl font-serif italic text-black/60 max-w-2xl mx-auto">
               "No viajes solo. Únete a los que ya entendieron. Los Caminantes somos una comunidad de quienes creen que hay algo más detrás de las montañas."
             </p>

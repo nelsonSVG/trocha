@@ -56,7 +56,7 @@ export default function HomePage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-6xl md:text-[120px] font-bold leading-[0.85] mb-8 uppercase"
+            className="text-5xl sm:text-6xl md:text-[120px] font-bold leading-[0.85] mb-8 uppercase"
           >
             AGARRANDO<br/>TROCHA
           </motion.h1>
@@ -106,7 +106,7 @@ export default function HomePage() {
               className="lg:col-span-6"
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-black/40 block mb-12">01 / IDEA INICIAL</span>
-              <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-12">
+              <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-12 uppercase">
                 "¿QUÉ HAY DETRÁS DE LAS MONTAÑAS?"
               </h2>
               <div className="text-lg text-black/70 leading-relaxed font-medium space-y-8">
@@ -163,7 +163,7 @@ export default function HomePage() {
               transition={fadeInUp.transition}
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/60 block mb-12">02 / EL PROYECTO</span>
-              <h2 className="text-4xl md:text-7xl font-bold mb-12 tracking-tight uppercase">DOCUMENTALISMO SOBRE DOS RUEDAS</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-12 tracking-tight uppercase">DOCUMENTALISMO SOBRE DOS RUEDAS</h2>
               <p className="text-xl text-white/80 leading-relaxed font-medium mb-12">
                 Agarrando Trocha es un proyecto de bikepacking documental nacido del deseo de narrar historias reales que habitan detrás de las montañas. Un puente para conectar realidades y despertar empatía a través del lente y el pedal.
               </p>
@@ -236,8 +236,8 @@ export default function HomePage() {
               transition={fadeInUp.transition}
               className="lg:col-span-5"
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 block mb-12">04 / EL AUTOR</span>
-              <h2 className="text-5xl md:text-7xl font-bold mb-12">CAMILO MEDINA</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 block mb-12">04 / EL AUTOR</span>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-12">CAMILO MEDINA</h2>
               <p className="text-xl text-white/80 font-medium italic mb-12 leading-relaxed">
                 Realizador audiovisual con experiencia en producción de campo para comerciales Colombia, recorriendo diferentes rincones del país. Contar historias a través de la bicicleta.
               </p>
@@ -307,7 +307,7 @@ export default function HomePage() {
             viewport={fadeInUp.viewport}
             transition={fadeInUp.transition}
           >
-            <h2 className="text-5xl md:text-8xl font-bold mb-16 uppercase tracking-tight">¿Vienes conmigo?</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold mb-16 uppercase tracking-tight leading-none">¿Vienes conmigo?</h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
               <Link href="/comunidad" className="btn-monte border-white text-white hover:bg-white hover:text-black">
                 Acompáñame en la ruta
