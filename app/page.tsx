@@ -1,15 +1,36 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { InstagramFeed } from '@/components/InstagramFeed';
 
+const HERO_IMAGES = [
+  { src: '/images/home/27.jpg', alt: 'Camilo Medina pedaleando por una trocha de montaña' },
+  { src: '/images/rutas/los-olvidados/10.jpg', alt: 'Paisaje de Los Olvidados' },
+  { src: '/images/rutas/los-olvidados/6.jpg', alt: 'Montañas de Los Olvidados' },
+  { src: '/images/rutas/los-olvidados/8.jpg', alt: 'Trocha en Los Olvidados' },
+  { src: '/images/rutas/paramillo-quindio/Paramillo-3.jpg', alt: 'Frailejones en el Paramillo del Quindío' },
+  { src: '/images/rutas/el-empiezo/16032023-presidente.jpg', alt: 'Ruta El Empiezo' },
+  { src: '/images/rutas/los-olvidados/11.jpg', alt: 'Camino rural en Los Olvidados' },
+  { src: '/images/rutas/paramillo-quindio/Paramillo-2.jpg', alt: 'Páramo del Quindío' },
+  { src: '/images/home/21.jpg', alt: 'Camilo Medina en el páramo' },
+  { src: '/images/rutas/el-empiezo/11032023-IMG_1515.jpg', alt: 'Paisaje de Ruta El Empiezo' },
+];
+
 export default function HomePage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -31,13 +52,24 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-        <Image 
-          src="/images/home/27.jpg" 
-          alt="Camilo Medina pedaleando por una trocha de montaña" 
-          fill 
-          priority
-          className="object-cover"
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+            className="absolute inset-0"
+          >
+            <Image 
+              src={HERO_IMAGES[currentImageIndex].src} 
+              alt={HERO_IMAGES[currentImageIndex].alt} 
+              fill 
+              priority={currentImageIndex === 0}
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-20 text-center text-white px-6">
