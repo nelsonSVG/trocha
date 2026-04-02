@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://agarrandotrocha.com'),
+  metadataBase: new URL('https://trocha.svgvisual.com'),
   title: {
     default: 'Agarrando Trocha | Bikepacking Colombia & Documentales',
     template: '%s | Agarrando Trocha',
