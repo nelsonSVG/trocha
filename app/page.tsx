@@ -22,22 +22,12 @@ const HERO_IMAGES = [
   { src: '/images/rutas/el-empiezo/11032023-IMG_1515.jpg', alt: 'Paisaje de Ruta El Empiezo' },
 ];
 
-// Hero image Ken Burns effect - consistent zoom-in for all images
-const HERO_ZOOM = {
-  scale: [1, 1.05] as [number, number],
-  duration: 20,
-  ease: "easeOut" as const,
-  repeat: Infinity,
-  repeatType: "reverse" as const,
-};
-
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // 6-second delay before starting the slideshow
     const initialTimeout = setTimeout(() => {
       const interval = setInterval(() => {
         setNextIndex((prev) => {
@@ -49,7 +39,7 @@ export default function HomePage() {
           }, 1500);
           return newNext;
         });
-      }, 5000);
+      }, 6000);
       return () => clearInterval(interval);
     }, 6000);
 
@@ -76,19 +66,16 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Current image layer */}
+        {/* Current image layer - always visible, zooms from 1 to 1.04 */}
         <motion.div
+          key={`hero-current-${currentIndex}`}
           className="absolute inset-0 overflow-hidden"
           style={{ zIndex: 1 }}
         >
           <motion.div
-            animate={{ scale: HERO_ZOOM.scale }}
-            transition={{
-              duration: HERO_ZOOM.duration,
-              repeat: HERO_ZOOM.repeat,
-              repeatType: HERO_ZOOM.repeatType,
-              ease: HERO_ZOOM.ease,
-            }}
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.04 }}
+            transition={{ duration: 4, ease: "easeOut" }}
             className="relative w-full h-full"
           >
             <Image 
@@ -101,36 +88,31 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* Next image layer - fades in during transition */}
-        <motion.div
-          className="absolute inset-0 overflow-hidden"
-          style={{ zIndex: 2 }}
-          animate={{
-            opacity: isTransitioning ? 1 : 0,
-          }}
-          transition={{
-            duration: 1.5,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-        >
+        {/* Next image layer - only rendered during transition to avoid flash */}
+        {isTransitioning && (
           <motion.div
-            animate={{ scale: HERO_ZOOM.scale }}
-            transition={{
-              duration: HERO_ZOOM.duration,
-              repeat: HERO_ZOOM.repeat,
-              repeatType: HERO_ZOOM.repeatType,
-              ease: HERO_ZOOM.ease,
-            }}
-            className="relative w-full h-full"
+            key={`hero-next-${nextIndex}`}
+            className="absolute inset-0 overflow-hidden"
+            style={{ zIndex: 2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <Image 
-              src={HERO_IMAGES[nextIndex].src} 
-              alt={HERO_IMAGES[nextIndex].alt} 
-              fill 
-              className="object-cover"
-            />
+            <motion.div
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.04 }}
+              transition={{ duration: 4, ease: "easeOut" }}
+              className="relative w-full h-full"
+            >
+              <Image 
+                src={HERO_IMAGES[nextIndex].src} 
+                alt={HERO_IMAGES[nextIndex].alt} 
+                fill 
+                className="object-cover"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
         <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-20 text-center text-white px-6">
