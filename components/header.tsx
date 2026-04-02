@@ -119,7 +119,7 @@ export function Header() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-white z-50 flex flex-col md:hidden"
+            className="fixed inset-0 bg-white z-[60] flex flex-col md:hidden"
           >
             {/* Mobile Header (Fixed within the full page menu) */}
             <div className="p-8 border-b border-black/5 flex justify-between items-center">
