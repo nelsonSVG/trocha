@@ -1,30 +1,12 @@
 import type {Metadata} from 'next';
-import { Inter, Playfair_Display, Lora, DM_Sans, JetBrains_Mono } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-sans',
-});
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-display',
-});
-
-const lora = Lora({
-  subsets: ['latin'],
-  variable: '--font-serif',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-accent',
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-montserrat',
 });
 
 export const metadata: Metadata = {
@@ -159,7 +141,7 @@ const organizationSchema = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable} ${lora.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" className={`${montserrat.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -170,7 +152,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className="bg-white text-black font-serif antialiased selection:bg-black selection:text-white" suppressHydrationWarning>
+      <body className="bg-white text-black font-sans antialiased selection:bg-black selection:text-white" suppressHydrationWarning>
         {children}
       </body>
     </html>

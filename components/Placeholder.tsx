@@ -23,7 +23,7 @@ export default function Placeholder({ label, className = '', aspectRatio = 'land
       <div className="z-10 flex flex-col items-center gap-2 px-4 text-center">
         <ImageIcon className="w-5 h-5 text-black/20" strokeWidth={1} />
         {label && (
-          <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-black/40 leading-tight max-w-[200px]">
+          <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-black/40 leading-tight max-w-[200px]">
             {label}
           </span>
         )}

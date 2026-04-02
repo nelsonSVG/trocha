@@ -1,24 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
-  --font-serif: var(--font-serif);
-  --font-accent: var(--font-accent);
-  --font-mono: var(--font-mono);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-montserrat);
+  --font-serif: var(--font-montserrat);
+  --font-accent: var(--font-montserrat);
+  --font-mono: var(--font-montserrat);
 
-  --color-mountain-green: #000000;
-  --color-earth-brown: #333333;
-  --color-mist-gray: #E5E5E5;
-  --color-snow-white: #FFFFFF;
-  --color-charcoal: #000000;
-  --color-paramo-gold: #000000;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray-dark: #333333;
+  --color-gray-light: #E5E5E5;
+  
+  --container-max-width: 1140px;
+  --section-spacing: 99px;
 }
 
 @layer base {
   body {
-    @apply font-serif bg-white text-black;
+    @apply font-sans bg-white text-black;
   }
+  
+  h1 {
+    @apply font-bold uppercase;
+    letter-spacing: -0.9px;
+  }
+
+  h2 {
+    @apply font-semibold uppercase;
+    letter-spacing: 0.02em;
+  }
+}
+
+.container-boxed {
+  @apply mx-auto px-6 md:px-0;
+  max-width: var(--container-max-width);
+}
+
+.section-gap {
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+}
+
+.btn-monte {
+  @apply inline-block rounded-full px-12 py-5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 border border-black;
+}
+
+.btn-monte-primary {
+  @apply bg-black text-white hover:bg-white hover:text-black;
+}
+
+.btn-monte-outline {
+  @apply bg-transparent text-black hover:bg-black hover:text-white;
 }
 
 .wireframe-grid {

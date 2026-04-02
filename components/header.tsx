@@ -3,17 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
   { name: 'El Camino', href: '/historia' },
-  { name: 'El Archivo', href: '/videos' },
+  { name: 'El Archivo', href: '/archivo' },
   { name: 'Diarios de Ruta', href: '/blog' },
   { name: 'Los Caminantes', href: '/comunidad' },
   { name: 'La Tienda', href: '/tienda' },
-  { name: 'Instantes', href: '/galeria' },
 ];
 
 export function Header() {
@@ -23,42 +22,71 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 200); // Increased threshold to match reference aesthetic
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHome = pathname === '/';
+  const showWhiteHeader = scrolled || !isHome;
+
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-6 md:px-12",
-        scrolled ? "bg-white/90 backdrop-blur-md py-4 border-b border-black/5" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 md:px-12",
+        showWhiteHeader 
+          ? "bg-white/90 backdrop-blur-md py-4 border-b border-black/5 text-black" 
+          : "bg-gradient-to-b from-black/40 to-transparent backdrop-blur-[2px] py-6 text-white"
       )}
     >
       <nav className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-lg font-display tracking-tight hover:opacity-70 transition-opacity flex flex-col">
-          <span className="leading-none">AGARRANDO</span>
-          <span className="leading-none ml-4">TROCHA</span>
+        <Link href="/" className="flex items-center gap-4 group">
+          <img 
+            src={showWhiteHeader ? "/logo-black.svg" : "/logo-white.svg"} 
+            alt="Agarrando Trocha Logo" 
+            className="w-12 h-12 transition-all duration-500 group-hover:rotate-12"
+          />
+          <div className="text-xl font-bold tracking-[-0.05em] uppercase flex flex-col">
+            <span className="leading-[0.8] tracking-[-0.9px]">AGARRANDO</span>
+            <span className="leading-[0.8] ml-6 tracking-[-0.9px]">TROCHA</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-10">
+        <div className="hidden md:flex items-center space-x-12">
           {navLinks.map((link) => (
             <Link 
               key={link.href} 
               href={link.href}
               className={cn(
-                "text-[10px] font-mono uppercase tracking-[0.2em] hover:text-black transition-colors relative group",
-                pathname === link.href ? "text-black font-bold" : "text-black/40"
+                "text-[10px] font-semibold uppercase tracking-[0.3em] transition-all duration-300 relative group",
+                showWhiteHeader 
+                  ? (pathname === link.href ? "text-black" : "text-black/50 hover:text-black")
+                  : (pathname === link.href ? "text-white" : "text-white/60 hover:text-white")
               )}
             >
               {link.name}
-              {pathname === link.href && (
-                <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-[1px] bg-black" />
-              )}
+              <motion.div 
+                className={cn(
+                  "absolute -bottom-1 left-0 h-[1px] transition-all duration-300",
+                  showWhiteHeader ? "bg-black" : "bg-white",
+                  pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                )}
+              />
             </Link>
           ))}
+          <a 
+            href="https://instagram.com/agarrandotrochacol" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={cn(
+              "transition-all duration-300 hover:scale-110 ml-4",
+              showWhiteHeader ? "text-black" : "text-white"
+            )}
+          >
+            <Instagram size={18} strokeWidth={1.5} />
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -94,6 +122,18 @@ export function Header() {
                   {link.name}
                 </Link>
               ))}
+              <div className="pt-6 border-t border-black/5">
+                <a 
+                  href="https://instagram.com/agarrandotrochacol" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-4 text-xl font-display tracking-tight text-black"
+                >
+                  <Instagram size={24} strokeWidth={1.5} />
+                  INSTAGRAM
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

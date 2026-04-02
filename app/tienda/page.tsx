@@ -26,7 +26,7 @@ export default function ShopPage() {
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-8">EQUIPO / ARTE</span>
             <h1 className="text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">LA TIENDA</h1>
             <p className="text-2xl font-serif italic text-black/60 max-w-2xl">
-              &quot;No necesitas mucho. Solo lo necesario. Objetos que cuentan historias y arte que captura instantes.&quot;
+              "No necesitas mucho. Solo lo necesario. Objetos que cuentan historias y arte que captura instantes."
             </p>
           </div>
 
@@ -88,7 +88,7 @@ export default function ShopPage() {
               <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-12">SISTEMA DE COMPRA</span>
               <h2 className="text-4xl md:text-6xl font-display mb-8 tracking-tighter uppercase">¿CÓMO COMPRAR?</h2>
               <p className="text-xl font-serif italic text-black/60 mb-12 max-w-xl mx-auto leading-relaxed">
-                &quot;No usamos tarjetas. Hablamos directo. Es más humano. Selecciona lo que te gusta y escríbenos por WhatsApp para coordinar el pago y el envío.&quot;
+                "No usamos tarjetas. Hablamos directo. Es más humano. Selecciona lo que te gusta y escríbenos por WhatsApp para coordinar el pago y el envío."
               </p>
               <div className="flex justify-center">
                 <button className="bg-black text-white px-16 py-6 text-[10px] font-mono uppercase tracking-[0.4em] hover:invert transition-all">

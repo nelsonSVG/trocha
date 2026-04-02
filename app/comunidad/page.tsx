@@ -17,7 +17,7 @@ export default function CommunityPage() {
       name: "ALMA DE TROCHA", 
       price: "$100.000/MES", 
       icon: <Heart size={32} strokeWidth={1} />,
-      benefits: ["Todo de Caminante", "Fotografía impresa mensual", "Tu nombre en créditos", "10% descuento en tienda"],
+      benefits: ["Todo de Caminante", "Fotografía impresa mensual", "Tu nombre en mis créditos", "10% descuento en tienda"],
       featured: true
     }
   ];
@@ -38,7 +38,7 @@ export default function CommunityPage() {
             <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-black/40 block mb-8">COMUNIDAD / APOYO</span>
             <h1 className="text-6xl md:text-9xl font-display leading-none tracking-tighter mb-12 uppercase">LOS CAMINANTES</h1>
             <p className="text-2xl font-serif italic text-black/60 max-w-2xl mx-auto">
-              &quot;No viajes solo. Únete a los que ya entendieron. Los Caminantes somos una comunidad de quienes creen que hay algo más detrás de las montañas.&quot;
+              "No viajes solo. Únete a los que ya entendieron. Los Caminantes somos una comunidad de quienes creen que hay algo más detrás de las montañas."
             </p>
           </div>
 
@@ -57,7 +57,7 @@ export default function CommunityPage() {
                 <div className={`${tier.featured ? 'text-white/40' : 'text-black/20'} mb-12 group-hover:text-black transition-colors`}>
                   {tier.icon}
                 </div>
-                <h2 className="text-5xl font-display mb-4 tracking-tight">{tier.name}</h2>
+                <h2 className="text-5xl font-display mb-4 tracking-tight uppercase">{tier.name}</h2>
                 <p className="text-3xl font-display mb-12 opacity-60">{tier.price}</p>
                 
                 <ul className="space-y-6 mb-16">
@@ -119,7 +119,7 @@ export default function CommunityPage() {
                 </div>
               </div>
               <p className="mt-20 text-xl italic text-black/40 font-serif">
-                &quot;No es una donación. Es compañía en el camino.&quot;
+                "No es una donación. Es compañía en mi camino."
               </p>
             </div>
           </div>
