@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Logo de Agarrando Trocha - Símbolo AT blanco sobre fondo negro',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: 'Agarrando Trocha | Bikepacking Colombia',
     description: 'Camilo Medina recorre Colombia en bicicleta documentando historias de la ruralidad. Bikepacking, páramos y la pregunta: ¿Qué hay detrás de las montañas?',
     creator: '@agarrandotrochacol',
-    images: ['/og-image.svg'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
