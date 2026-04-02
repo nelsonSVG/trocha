@@ -11,7 +11,7 @@ export function Footer() {
           <img 
             src="/logo-white.svg" 
             alt="AT Símbolo" 
-            className="w-32 h-32 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
+            className="w-64 h-64 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
           />
         </div>
 
@@ -28,7 +28,6 @@ export function Footer() {
           <Link href="/blog" className="hover:text-white transition-colors">Relatos</Link>
           <Link href="/comunidad" className="hover:text-white transition-colors">Caminantes</Link>
           <Link href="/tienda" className="hover:text-white transition-colors">Tienda</Link>
-          <Link href="/galeria" className="hover:text-white transition-colors">Instantes</Link>
         </nav>
 
         <div className="flex space-x-12 mb-20">
