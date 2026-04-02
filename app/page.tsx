@@ -275,7 +275,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { src: "/images/rutas/los-olvidados/6.jpg", alt: "Montañas de Los Olvidados", span: "md:col-span-2" },
-              { src: "/images/rutas/paramillo-quindio/Paramillo 3.jpg", alt: "Frailejones en el Paramillo", span: "" },
+              { src: "/images/rutas/paramillo-quindio/Paramillo-3.jpg", alt: "Frailejones en el Paramillo", span: "" },
               { src: "/images/rutas/el-empiezo/16032023-presidente.jpg", alt: "Ruta El Empiezo", span: "" },
               { src: "/images/home/3.jpg", alt: "Trocha y frailejones", span: "" },
               { src: "/images/home/22.jpg", alt: "Perro y bicicleta", span: "" },

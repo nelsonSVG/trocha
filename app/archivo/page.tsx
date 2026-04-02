@@ -153,7 +153,7 @@ const ARCHIVO_ITEMS = [
   { 
     id: 14, 
     type: 'route', 
-    src: '/images/rutas/los-olvidados/1.JPG', 
+    src: '/images/rutas/los-olvidados/1.jpg', 
     alt: 'Los Olvidados - Inicio',
     description: 'Inicio de la expedición "La Ruta de los Olvidados". 10 departamentos, 3 meses y la búsqueda incansable de lo que hay detrás de las montañas.',
     link: '/blog/los-olvidados'
@@ -195,7 +195,7 @@ const ARCHIVO_ITEMS = [
   { 
     id: 17, 
     type: 'route', 
-    src: '/images/rutas/paramillo-quindio/Paramillo 4.jpg', 
+    src: '/images/rutas/paramillo-quindio/Paramillo-4.jpg', 
     alt: 'Paramillo del Quindío - Cumbre',
     description: 'Alcanzando la cumbre del Paramillo del Quindío. Un desafío físico y mental que nos enseña a sostener lo que anhelamos.',
     link: '/blog/paramillo-del-quindio'
@@ -203,7 +203,7 @@ const ARCHIVO_ITEMS = [
   { 
     id: 18, 
     type: 'route', 
-    src: '/images/rutas/paramillo-quindio/Paramillo 3.jpg', 
+    src: '/images/rutas/paramillo-quindio/Paramillo-3.jpg', 
     alt: 'Paramillo del Quindío - Páramo',
     description: 'Atravesando el ecosistema de páramo en el Quindío. La fragilidad y la fuerza de la vida en las alturas.',
     link: '/blog/paramillo-del-quindio'
@@ -211,7 +211,7 @@ const ARCHIVO_ITEMS = [
   { 
     id: 23, 
     type: 'route', 
-    src: '/images/rutas/paramillo-quindio/Paramillo 1.jpg', 
+    src: '/images/rutas/paramillo-quindio/Paramillo-1.jpg', 
     alt: 'Cima',
     description: 'La vista desde arriba. Cuando el esfuerzo se convierte en perspectiva y el miedo se atraviesa con cada pedalazo.',
     link: '/blog/paramillo-del-quindio'

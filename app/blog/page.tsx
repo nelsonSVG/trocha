@@ -24,7 +24,7 @@ export default function BlogPage() {
       coord: 'Antioquia - Putumayo',
       category: 'Rutas', 
       excerpt: '¿Qué hay detrás de las montañas? Esa pregunta me acompaña desde hace años. Vuelve cada vez que pedaleo, cuando el aire frío golpea la cara y el camino se vuelve cuesta arriba.', 
-      img: '/images/rutas/los-olvidados/1.JPG' 
+      img: '/images/rutas/los-olvidados/1.jpg' 
     },
     { 
       title: 'PARAMILLO DEL QUINDÍO', 
@@ -33,7 +33,7 @@ export default function BlogPage() {
       coord: '4.6333° N, 75.4167° W',
       category: 'Rutas', 
       excerpt: 'Nada desaparece, todo cambia. El Paramillo del Quindío me lo recordó cuando escuché que ya no quedaba nieve allí y, sin embargo, mis ojos la vieron resistiendo.', 
-      img: '/images/rutas/paramillo-quindio/Paramillo 4.jpg' 
+      img: '/images/rutas/paramillo-quindio/Paramillo-4.jpg' 
     },
     { 
       title: 'EL EMPIEZO', 

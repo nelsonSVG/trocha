@@ -15,7 +15,7 @@ const BLOG_POSTS: Record<string, any> = {
     date: '15.04.24',
     coord: 'Antioquia - Putumayo',
     category: 'Rutas',
-    heroImage: '/images/rutas/los-olvidados/1.JPG',
+    heroImage: '/images/rutas/los-olvidados/1.jpg',
     excerpt: '¿Qué hay detrás de las montañas? Esa pregunta me acompaña desde hace años. Vuelve cada vez que pedaleo, cuando el aire frío golpea la cara y el camino se vuelve cuesta arriba.',
     content: [
       {
@@ -61,7 +61,7 @@ const BLOG_POSTS: Record<string, any> = {
         layout: 'grid',
         images: [
           { src: '/images/rutas/los-olvidados/28.jpg', alt: 'Reflexión necesaria en la quietud del camino', size: 'normal' },
-          { src: '/images/rutas/los-olvidados/MAPA.JPG.jpg', alt: 'El mapa de una expedición por la Colombia profunda', size: 'normal' },
+          { src: '/images/rutas/los-olvidados/MAPA.jpg', alt: 'El mapa de una expedición por la Colombia profunda', size: 'normal' },
         ]
       }
     ]
@@ -71,7 +71,7 @@ const BLOG_POSTS: Record<string, any> = {
     date: '20.03.24',
     coord: '4.6333° N, 75.4167° W',
     category: 'Rutas',
-    heroImage: '/images/rutas/paramillo-quindio/Paramillo 4.jpg',
+    heroImage: '/images/rutas/paramillo-quindio/Paramillo-4.jpg',
     excerpt: 'Nada desaparece, todo cambia. El Paramillo del Quindío me lo recordó cuando escuché que ya no quedaba nieve allí y, sin embargo, mis ojos la vieron resistiendo.',
     content: [
       {
@@ -82,8 +82,8 @@ const BLOG_POSTS: Record<string, any> = {
         type: 'gallery',
         layout: 'wide',
         images: [
-          { src: '/images/rutas/paramillo-quindio/Paramillo 1.jpg', alt: 'Alcanzando la cumbre del Paramillo', size: 'wide' },
-          { src: '/images/rutas/paramillo-quindio/Paramillo 2.jpg', alt: 'Resistencia blanca sobre la roca volcánica', size: 'wide' },
+          { src: '/images/rutas/paramillo-quindio/Paramillo-1.jpg', alt: 'Alcanzando la cumbre del Paramillo', size: 'wide' },
+          { src: '/images/rutas/paramillo-quindio/Paramillo-2.jpg', alt: 'Resistencia blanca sobre la roca volcánica', size: 'wide' },
         ]
       },
       {
@@ -94,8 +94,8 @@ const BLOG_POSTS: Record<string, any> = {
         type: 'gallery',
         layout: 'vento',
         images: [
-          { src: '/images/rutas/paramillo-quindio/Paramillo 3.jpg', alt: 'Frailejones: guardianes del agua en la alta montaña', size: 'large' },
-          { src: '/images/rutas/paramillo-quindio/Paramillo 5.jpg', alt: 'La inmensidad del ecosistema de páramo', size: 'small' },
+          { src: '/images/rutas/paramillo-quindio/Paramillo-3.jpg', alt: 'Frailejones: guardianes del agua en la alta montaña', size: 'large' },
+          { src: '/images/rutas/paramillo-quindio/Paramillo-5.jpg', alt: 'La inmensidad del ecosistema de páramo', size: 'small' },
         ]
       }
     ]
