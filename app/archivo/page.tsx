@@ -43,81 +43,9 @@ const ARCHIVO_ITEMS = [
 
   // Illustrations
   { 
-    id: 1, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-1.png', 
-    alt: 'Ilustración Agarrando Trocha 1',
-    description: 'Interpretación visual de la libertad en dos ruedas. Cargar solo lo necesario, tanto en la bicicleta como en la vida.',
-    link: '/comunidad'
-  },
-  { 
-    id: 2, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-2.png', 
-    alt: 'Ilustración Agarrando Trocha 2',
-    description: 'El mapa de los sueños. Rutas que se dibujan mientras se pedalean, sin respuestas, dejando que el camino se resuelva andando.',
-    link: '/tienda'
-  },
-  { 
-    id: 3, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-3.png', 
-    alt: 'Ilustración Agarrando Trocha 3',
-    description: 'Conectar con la montaña y con uno mismo. El bikepacking como terapia y como terapeuta.',
-    link: '/comunidad'
-  },
-  { 
     id: 4, 
     type: 'illustration', 
-    src: '/images/archivo/ilustracion-4.png', 
-    alt: 'Ilustración Agarrando Trocha 4',
-    description: 'La esencia de Agarrando Trocha: minimalismo, aventura y el coraje de hacer menos para alcanzar mayor profundidad.',
-    link: '/tienda'
-  },
-  { 
-    id: 2, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-2.png', 
-    alt: 'Ilustración Agarrando Trocha 2',
-    description: 'El mapa de los sueños. Rutas que se dibujan mientras se pedalean, sin respuestas, dejando que el camino se resuelva andando.',
-    link: '/tienda'
-  },
-  { 
-    id: 3, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-3.png', 
-    alt: 'Ilustración Agarrando Trocha 3',
-    description: 'Conectar con la montaña y con uno mismo. El bikepacking como terapia y como terapeuta.',
-    link: '/comunidad'
-  },
-  { 
-    id: 4, 
-    type: 'illustration', 
-    src: '/images/archivo/ilustracion-4.png', 
-    alt: 'Ilustración Agarrando Trocha 4',
-    description: 'La esencia de Agarrando Trocha: minimalismo, aventura y el coraje de hacer menos para alcanzar mayor profundidad.',
-    link: '/tienda'
-  },
-  { 
-    id: 2, 
-    type: 'illustration', 
-    src: '/images/archivo/Sin título-4 (1).png', 
-    alt: 'Ilustración Agarrando Trocha 2',
-    description: 'El mapa de los sueños. Rutas que se dibujan mientras se pedalean, sin respuestas, dejando que el camino se resuelva andando.',
-    link: '/tienda'
-  },
-  { 
-    id: 3, 
-    type: 'illustration', 
-    src: '/images/archivo/Sin título-5 (1).png', 
-    alt: 'Ilustración Agarrando Trocha 3',
-    description: 'Conectar con la montaña y con uno mismo. El bikepacking como terapia y como terapeuta.',
-    link: '/comunidad'
-  },
-  { 
-    id: 4, 
-    type: 'illustration', 
-    src: '/images/archivo/Sin título-6 (1).png', 
+    src: '/images/archivo/ilustracion-4.jpg', 
     alt: 'Ilustración Agarrando Trocha 4',
     description: 'La esencia de Agarrando Trocha: minimalismo, aventura y el coraje de hacer menos para alcanzar mayor profundidad.',
     link: '/tienda'
