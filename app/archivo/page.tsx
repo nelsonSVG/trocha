@@ -45,10 +45,58 @@ const ARCHIVO_ITEMS = [
   { 
     id: 1, 
     type: 'illustration', 
-    src: '/images/archivo/Sin título-2 (1).png', 
+    src: '/images/archivo/ilustracion-1.png', 
     alt: 'Ilustración Agarrando Trocha 1',
     description: 'Interpretación visual de la libertad en dos ruedas. Cargar solo lo necesario, tanto en la bicicleta como en la vida.',
     link: '/comunidad'
+  },
+  { 
+    id: 2, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-2.png', 
+    alt: 'Ilustración Agarrando Trocha 2',
+    description: 'El mapa de los sueños. Rutas que se dibujan mientras se pedalean, sin respuestas, dejando que el camino se resuelva andando.',
+    link: '/tienda'
+  },
+  { 
+    id: 3, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-3.png', 
+    alt: 'Ilustración Agarrando Trocha 3',
+    description: 'Conectar con la montaña y con uno mismo. El bikepacking como terapia y como terapeuta.',
+    link: '/comunidad'
+  },
+  { 
+    id: 4, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-4.png', 
+    alt: 'Ilustración Agarrando Trocha 4',
+    description: 'La esencia de Agarrando Trocha: minimalismo, aventura y el coraje de hacer menos para alcanzar mayor profundidad.',
+    link: '/tienda'
+  },
+  { 
+    id: 2, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-2.png', 
+    alt: 'Ilustración Agarrando Trocha 2',
+    description: 'El mapa de los sueños. Rutas que se dibujan mientras se pedalean, sin respuestas, dejando que el camino se resuelva andando.',
+    link: '/tienda'
+  },
+  { 
+    id: 3, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-3.png', 
+    alt: 'Ilustración Agarrando Trocha 3',
+    description: 'Conectar con la montaña y con uno mismo. El bikepacking como terapia y como terapeuta.',
+    link: '/comunidad'
+  },
+  { 
+    id: 4, 
+    type: 'illustration', 
+    src: '/images/archivo/ilustracion-4.png', 
+    alt: 'Ilustración Agarrando Trocha 4',
+    description: 'La esencia de Agarrando Trocha: minimalismo, aventura y el coraje de hacer menos para alcanzar mayor profundidad.',
+    link: '/tienda'
   },
   { 
     id: 2, 
@@ -345,13 +393,12 @@ export default function ArchivoPage() {
                   <div className="group relative overflow-hidden bg-black/5">
                     {item.type === 'video' ? (
                       <div className="relative aspect-video w-full overflow-hidden bg-black">
-                        <Image 
-                          src={item.thumbnail || ''} 
-                          alt={item.title || ''} 
-                          fill
-                          className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
-                          unoptimized={true}
-                        />
+                         <Image 
+                           src={item.thumbnail || ''} 
+                           alt={item.title || ''} 
+                           fill
+                           className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                         />
                         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white p-6">
                           <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-500">
                             <Play fill="currentColor" size={24} className="ml-1" />
@@ -364,14 +411,13 @@ export default function ArchivoPage() {
                       </div>
                     ) : (
                       <div className="relative">
-                        <Image 
-                          src={item.src || ''} 
-                          alt={item.alt || ''} 
-                          width={800}
-                          height={1000}
-                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                          unoptimized={true}
-                        />
+                         <Image 
+                           src={item.src || ''} 
+                           alt={item.alt || ''} 
+                           width={800}
+                           height={1000}
+                           className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                           <div className="text-white space-y-2">
                              <span className="text-[8px] font-mono uppercase tracking-[0.4em] opacity-60">{item.type}</span>
@@ -435,13 +481,12 @@ export default function ArchivoPage() {
                       {selectedItem.type === 'video' ? (
                         <div className="w-full h-full flex items-center justify-center">
                           <div className="relative aspect-video w-full overflow-hidden bg-black shadow-2xl">
-                            <Image 
-                              src={selectedItem.thumbnail || ''} 
-                              alt={selectedItem.title || ''} 
-                              fill
-                              className="object-cover opacity-40"
-                              unoptimized={true}
-                            />
+                             <Image 
+                               src={selectedItem.thumbnail || ''} 
+                               alt={selectedItem.title || ''} 
+                               fill
+                               className="object-cover opacity-40"
+                             />
                             <div className="absolute inset-0 flex items-center justify-center">
                                <div className="p-8 border border-white/20 rounded-full text-white flex flex-col items-center gap-4">
                                 <Play size={48} fill="white" />
@@ -451,14 +496,13 @@ export default function ArchivoPage() {
                           </div>
                         </div>
                       ) : (
-                        <Image 
-                          src={selectedItem.src || ''} 
-                          alt={selectedItem.alt || ''} 
-                          fill
-                          className="object-contain"
-                          priority
-                          unoptimized={true}
-                        />
+                         <Image 
+                           src={selectedItem.src || ''} 
+                           alt={selectedItem.alt || ''} 
+                           fill
+                           className="object-contain"
+                           priority
+                         />
                       )}
                     </motion.div>
                   </AnimatePresence>
